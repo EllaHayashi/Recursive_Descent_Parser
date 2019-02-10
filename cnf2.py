@@ -8,150 +8,93 @@ import csv
 import re
 from StringIO import StringIO
 import tokenize
-
+import Lexer
 #from pythonds.basic.stack import Stack
 #from pythonds.trees.binaryTree import BinaryTree
 
 class Node:
 	def __init__(self, data):
-		self.data = data
-		self.children = []
-	def add_child(self, obj):
-		self.children.append(obj)
-	def remove_child(parent, child):
-		for i in len(parent.children):
-			if parent.children[i] == child:
-				del parent.children[i]
-	def traverse(tree):
-		if tree == None: return 0
-		for i in len(tree.children):
-			print tree.data + traverse(tree.children[i])
-		return 0
-
+		self.l = None
+		self.r = None
+		self.v = val
+class Tree:
+	def __init__(self):
+		self.root = None
+	
 
 
 x = 0 #universal array counter
-ASTtree = Node("temp")
 
 
 
 def SENT(input, tree):
 	
-	#put DISJ IMPOP SENT 
-	tree.add_child("DISJ")
-	tree.add_child("IMPOP")
-	tree.add_child("SENT")
+	tree1 = DISJ(input)
+	if(tree1 != NULL):
+		if input[x+1] = IMPOP:
+			#make the tree1 the left child of IMPOP and call it tree1 
+			tree2 = SENT(input)
+			if(tree2 != NULL):
+				#make tree2 the right child of tree1
+				return tree1
 
-	#check DISJ
-	#if DISJ true:
-		#check IMPOP
-		#if IMPOP true
-			#check SENT
-			#if SENT true
-				#return true
-			#if SENT false
-				#pop off IMPOP and SENT
-				#return true
-		#else
-			#pop off IMPOP and SENT
-			#return true
-	#else
-		#pop DISJ IMPOP SENT off tree
-		#return false
+		return tree1
+	else return NULL	
 
 
 def DISJ(input):
-	return false
-	#put CONJ OROP CONJ on tree
-	#check CONJ
-	#if CONJ true
-		#check ORDOP
-		#If ORDOP true
-			#Check conj
-			#if CONJ true
-				#return true
-			#if CONJ false
-				#pop ORDOP and CONJ off tree
-				#return true
-		#else
-			#pop ORDOP and CONJ off tree
-			#return true
-	#if false
-		#pop off CONJ ORDOP and CONJ
-		#return false
+	tree1 = CONJ(input)
+	if(tree1 !=NULL):
+		if input[x+1] = ORDOP:
+			#make the tree1 the left child of ORDOP and call it tree1
+			tree2 = CONJ(input)
+			if (tree2 != NULL):
+				#make the tree2 the right child of tree1
+				return tree1
 
+		return tree1
+	else return NULL
 
 def CONJ (input):
-	return false
-	#put LIT ANDOP LIT on tree
-	#Check LIT
-	#if LIT true
-		#CHECK ANDOP
-		#if ANDOP true
-			#CHECK LIT
-			#if LIT true
-				#return true
-			#if LIT false
-				#pop ANDOP LIT off tree
-				#return true
-		#if ANDOP false
-			#pop ANDOP LIT off tree
-			#return true
-	#if LIT False
-		#pop LIT ANDOP LIT off tree
-		#return false
-
-
+	tree1 = LIT(input)
+	if(tree1 != NULL):
+		if input[x+1] = ANDOP:
+			#make the tree1 the left child of ANDOP and call it tree 1
+			tree2 = LIT(input)
+			if(tree2!=NULL):
+				#make the tree 2 the right child of tree 1
+				return tree1
+		return tree1
+	else return NULL
 
 def LIT(input):
-	return false
-	#Put NEGOP ATOM on tree
-	#Check NEGOP
-	#if NEGOP true
-		#Check Atom
-		#if Atom True
-			#return true
-		#if Atom false
-			#pop NEGOP ATOM off tree
-			#return false
-	#else
-		#pop NEGOP ATOM off tree
-		#put ATOM on tree
-		#Check Atom
-		#if ATOM true
-			#return truee
-		#if Atom False
-			#pop Atom off tree
-			#return false
+	tree1 = ATOM(input)
+	if(tree1!=NULL):
+		return tree1
+	else:
+		if input[x] = NEGOP:
+			x=x+1
+			tree1 = ATOM(input)
+			#make tree1 the left child of NEGOP and call it tree 1
+			#return tree1
+		else return NULL
+
+def ATOM(input):
+	if input[x] = VAR:
+		tree1 = VAR
+		return tree1
+	elif input[x] = LPAREN
+		tree1 = SENT(input)
+		if(SENT!=NULL)
+			if input[x] = RPAREN
+				return tree1
+	elif return NULL 				
 	
 
 
-def ATOM(input):
-	return false
-	#put LPAREN SENT RPAREN on tree
-	#Check LPAREN
-	#if LPAREN true
-		#Check SENT
-		#if SENT true
-			#CHECK RPAREN
-			#if RPAREN True
-				#return true
-		#pop LPAREN SENT RPAREN off tree
-		#put VAR on tree
-		#if VAR true
-			#return true
-		#else
-			#return false
-	#Else
-		#pop LPAREN SENT RPAREN off tree
-		#put VAR on tree
-		#Check VAR
-		#if VAR true
-			#return true
-		#else
-			#return false
 
-		
+
+	
 def readFile(inputFile):
 	with open(inputFile, 'r') as f:
 		data = f.read().replace('\n','')
@@ -180,12 +123,12 @@ if __name__=='__main__':
 
 		x=0
 		
-		ASTtree = Node("SENT")
+#		ASTtree = Node("SENT")
 	#	print ASTtree.data
-		ASTtree = SENT(parsed, ASTtree)
+#		ASTtree = SENT(parsed, ASTtree)
 	#	print("\n\n\n\n")
 	#	print ASTtree.data
-		ASTtree.traverse(ASTtree)
+	#	ASTtree.traverse(ASTtree)
 
 		
 
