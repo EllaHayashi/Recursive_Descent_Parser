@@ -1,3 +1,8 @@
+to execute our code:
+	takes two commands, our cnf2.py document followed by our textFile.txt
+	"python cnf2.py textFile.txt"  <--- command to compile
+
+
 PARSING and AST Tree:
 	Main function:
 		parse code into an array of expressions
