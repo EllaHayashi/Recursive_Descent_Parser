@@ -138,8 +138,9 @@ def LIT(array):
 	if(tree1 is not None):
 		return tree1
 	else:
-		lx.input(array[x+1])
+		lx.input(array[x])
 		temp=str(lx.nextToken())
+		
 		if temp== "NEGOP":
 			if(x+1>=len(array)):
 				return None
